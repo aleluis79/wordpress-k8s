@@ -1,0 +1,29 @@
+# Default values for wp-demo.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+tz: America/Argentina/Buenos_Aires
+
+image:
+  pullPolicy: Always
+
+web:
+  ingress:
+    enabled: false
+
+  istio:
+    enabled: false
+    gateway: default/gateway-mpba
+    hosts: []
+
+  extraEnvs: {}
+  service:
+    type: ClusterIP
+    port: 8080
+
+istioLocal:
+  enabled: false

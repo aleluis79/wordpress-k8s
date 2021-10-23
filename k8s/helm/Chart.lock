@@ -1,0 +1,9 @@
+dependencies:
+- name: wordpress
+  repository: https://charts.bitnami.com/bitnami
+  version: 12.1.23
+- name: phpmyadmin
+  repository: https://charts.bitnami.com/bitnami
+  version: 8.2.17
+digest: sha256:6f3f15a04b89d801b2e64324a15a7d1c401d609eb287835d1139faa15c9fec7a
+generated: "2021-10-23T09:52:17.5389174-03:00"

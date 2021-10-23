@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-volume
+data:
+  phpmyadmin-vhost.conf: |
+    <VirtualHost 127.0.0.1:8080 _default_:8080>
+      ServerAlias *
+      DocumentRoot /opt/bitnami/phpmyadmin
+      <Directory "/opt/bitnami/phpmyadmin">
+        Options -Indexes +FollowSymLinks -MultiViews
+        AllowOverride All
+        Require all granted
+      </Directory>
+      Alias /phpmyadmin "/opt/bitnami/phpmyadmin"
+    </VirtualHost>

@@ -1,0 +1,28 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: wp-demo
+spec:
+  hosts:
+  {{- range .Values.web.istio.hosts }}
+  - {{ .host | squote }}
+  {{- end }}
+  gateways:
+  - {{ .Values.web.istio.gateway }}
+  http:
+  - match:
+    - uri:
+        prefix: /phpmyadmin
+    route:
+    - destination:
+        host: wp-demo-phpmyadmin
+        port:
+          number: 80
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: wp-demo-wordpress
+        port:
+          number: 80

@@ -1,0 +1,40 @@
+environment: local
+
+web:
+  istio:
+    enabled: true
+    gateway: default-gateway-mpba
+    hosts:
+    - host: "*"
+
+istioLocal:
+  enabled: true
+
+wordpress:
+  service:
+    type: ClusterIP
+  wordpressUsername: admin
+  wordpressPassword: password
+  allowEmptyPassword: false
+  persistence:
+    enabled: true
+    existingClaim: wordpress-pvc
+  volumePermissions:
+    enabled: true
+  mariadb:
+    auth:
+      rootPassword: secretpassword
+      password: "password"
+
+phpmyadmin:
+  db:
+    host: wp-demo-mariadb
+    port: 3306
+  extraVolumes:
+    - name: data-volume
+      configMap:
+        name: configmap-volume
+  extraVolumeMounts:
+    - name: data-volume
+      mountPath: /opt/bitnami/apache2/conf/vhosts/phpmyadmin-vhost.conf
+      subPath: phpmyadmin-vhost.conf
